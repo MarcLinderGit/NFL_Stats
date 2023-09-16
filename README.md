@@ -11,5 +11,3 @@ This Jupyter notebook presents a Python web scraping project that extracts NFL p
 5. **Data Storage**: Storing the scraped data for further analysis.
 
 This project provides a comprehensive example of web scraping using Python, BeautifulSoup, and requests, showcasing how to navigate through web pages, extract data, and organize it for analysis. You can adapt this code to scrape other sports statistics or websites of interest.
-
-Feel free to customize this introduction to fit the specific details and goals of your notebook.
