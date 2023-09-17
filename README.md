@@ -22,7 +22,6 @@ This Python script allows you to scrape NFL player and team statistics from the 
 - [Directory Structure](#directory-structure)
 - [Data Storage](#data-storage)
 - [Contributing](#contributing)
-- [License](#license)
 
 ## Introduction
 
@@ -152,10 +151,6 @@ for season in seasons:
 
 That's it! You can customize the parameters and seasons based on your specific data retrieval needs.
 
-
-## Functions
-
-Certainly! I'll extend the Functions section in the README, providing more information about each function and including code snippets along with explanations. Here's the updated Functions section:
 
 ## Functions
 
