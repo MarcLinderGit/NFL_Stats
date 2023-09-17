@@ -220,15 +220,14 @@ The scraped data is stored in CSV files within the appropriate directories. Each
 ### Player-level stats:
 Using the "passing" category as an example, the python script scrapes these pages ([Page 1](https://www.nfl.com/stats/player-stats/category/passing/2023/reg/all/passingyards/desc), [Page 2](https://www.nfl.com/stats/player-stats/category/passing/2023/REG/all/passingyards/DESC?aftercursor=AAAAGQAAABlAYkAAAAAAADFleUp6WldGeVkyaEJablJsY2lJNld5SXhORFlpTENJek1qQXdOVGswWmkwMU5URXlMVFEzTmpNdFlXSXlOQzFqTVdKa01EVXhaV1l3WldZaUxDSXlNREl6SWwxOQ==)) and outputs them in this structure:
 
-![Player Level](pictures/Output_structure/player.PNG)
+![Player Level](pictures/Output_structure/player.png)
 
 ### Team-level stats:
 Using the "passing" category as an example, the python script scrapes this [page](https://www.nfl.com/stats/team-stats/offense/passing/2023/reg/all) and outputs it in this structure:
 
-![Team Level](pictures/Output_structure/team.PNG)
+![Team Level](pictures/Output_structure/team.png)
 
 *Note:* In both cases the "week" folders only exist for the current season. They are not available for historic data. Instead, for historic data, the csv files are placed within the "player" or "team" folders.
-
 
 
 ## Contributing
