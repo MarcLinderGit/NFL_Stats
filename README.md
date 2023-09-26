@@ -1,6 +1,6 @@
 # NFL Statistics Scraper
 
-This Python script allows you to scrape NFL player and team statistics from the official NFL website and store the data in an organized format. You can specify the season and level (player or team) for which you want to retrieve statistics. The script also handles pagination to collect data from multiple pages efficiently.
+This Python script allows you to scrape NFL player and team statistics from the official NFL website and store the data in an organized format. You can specify the season and level (player or team) for which you want to retrieve statistics. The script also handles pagination to collect data from multiple pages efficiently. Please note that this a project for educational/personal use only. I do not own the rights to the NFL data.
 
 ## Table of Contents
 
