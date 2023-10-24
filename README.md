@@ -1,6 +1,6 @@
 # NFL Statistics Scraper
 
-This Python script allows you to scrape NFL player and team statistics from the official NFL website and store the data in an organized format. You can specify the season and level (player or team) for which you want to retrieve statistics. The script also handles pagination to collect data from multiple pages efficiently.
+This Python script allows you to scrape NFL player and team statistics from the official NFL website and store the data in an organized format. You can specify the season and level (player or team) for which you want to retrieve statistics. The script also handles pagination to collect data from multiple pages efficiently. Please note that this a project for educational/personal use only. I do not own the rights to the NFL data.
 
 ## Table of Contents
 
@@ -22,7 +22,6 @@ This Python script allows you to scrape NFL player and team statistics from the 
 - [Directory Structure](#directory-structure)
 - [Data Storage](#data-storage)
 - [Contributing](#contributing)
-- [License](#license)
 
 ## Introduction
 
@@ -155,10 +154,6 @@ That's it! You can customize the parameters and seasons based on your specific d
 
 ## Functions
 
-Certainly! I'll extend the Functions section in the README, providing more information about each function and including code snippets along with explanations. Here's the updated Functions section:
-
-## Functions
-
 The NFL Statistics Scraper script consists of several functions that serve specific purposes in the data scraping process. Below, you'll find detailed explanations and code snippets for each function.
 
 ### get_links
@@ -197,49 +192,6 @@ The NFL Statistics Scraper script consists of several functions that serve speci
 - The processed data is then exported to a CSV file in the unit's directory.
 
 ### get_stats
-
-The `get_stats` function serves as the entry point for collecting statistics data. It specifies the current season and week, organizes data storage directories, and initiates the scraping process.
-
-```python
-def get_stats(level, season):
-    """
-    Initiates the data scraping process for player or team statistics.
-
-    Args:
-        level (str): The statistics level, either "player" or "team".
-        season (str): The NFL season for which statistics are retrieved.
-    """
-    # Combine the base directory path with the current week for the current season,
-    # else store data in 'reg' (regular season) directory
-    global current_season
-    if season == current_season:
-        directory_path = os.path.join('data', season, level, 'week' + str(current_week))
-    elif season != current_season:
-        directory_path = os.path.join('data', season, level)
-
-    unit_links = format_links(level, season)
-
-    if level == "team":
-        for unit, categories in unit_links.items():
-            for category, _ in categories.items():
-                # Create a subdirectory for the current unit
-                unit_directory_path = os.path.join(directory_path, unit)
-
-                # Call scrape_and_process_data with unit and category
-                scrape_and_process_data(unit, category, level, unit_directory_path, unit_links)
-
-    elif level == "player":
-        for unit, categories in unit_links.items():
-            for category, _ in categories.items():
-                # Directly use the week1 directory for player-level data
-                unit_directory_path = directory_path
-
-                # Pass unit and category to the scrape_and_process_data function
-                scrape_and_process_data(unit, category, level, unit_directory_path, unit_links)
-    else:
-        print("Invalid level specified.")
-```
-
 - The `get_stats` function initiates the data scraping process for player or team statistics.
 - It combines the base directory path with the current season and week to determine the data storage directory.
 - Depending on the level ("player" or "team"), it iterates through units and categories, calling the `scrape_and_process_data` function to scrape and process data.
@@ -263,6 +215,20 @@ Note: If you insert the current season as season (season = current_season), the 
 ## Data Storage
 
 The scraped data is stored in CSV files within the appropriate directories. Each CSV file contains statistics data for a specific category.
+
+
+### Player-level stats:
+Using the "passing" category as an example, the python script scrapes these pages ([Page 1](https://www.nfl.com/stats/player-stats/category/passing/2023/reg/all/passingyards/desc), [Page 2](https://www.nfl.com/stats/player-stats/category/passing/2023/REG/all/passingyards/DESC?aftercursor=AAAAGQAAABlAYkAAAAAAADFleUp6WldGeVkyaEJablJsY2lJNld5SXhORFlpTENJek1qQXdOVGswWmkwMU5URXlMVFEzTmpNdFlXSXlOQzFqTVdKa01EVXhaV1l3WldZaUxDSXlNREl6SWwxOQ==)) and outputs them in this structure:
+
+![Player Level](pictures/Output_structure/player.png)
+
+### Team-level stats:
+Using the "passing" category as an example, the python script scrapes this [page](https://www.nfl.com/stats/team-stats/offense/passing/2023/reg/all) and outputs it in this structure:
+
+![Team Level](pictures/Output_structure/team.png)
+
+*Note:* In both cases the "week" folders only exist for the current season. They are not available for historic data. Instead, for historic data, the csv files are placed within the "player" or "team" folders.
+
 
 ## Contributing
 
