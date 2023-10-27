@@ -66,21 +66,20 @@ Before you begin, ensure you have the following requirements:
 ### Usage
 To use the NFL Statistics Scraper script (scrape.ipnyb), follow these steps:
 
-### Import Functions
+### Import NFLDataScraper Class
 
-First, import the necessary functions from the `functions.ipynb` file. You can do this using the `%run` magic command in Jupyter Notebook, or you can import the functions directly in Python. Ensure that the `functions.ipynb` file contains the required functions for data scraping.
+First, import the `NFLDataScraper` class from the `nfl_scraper.py` file.
 
 ```python
-# Import functions from functions.ipynb
-%run functions.ipynb
+from nfl_scraper import NFLDataScraper
 ```
 
-### Import Libraries
+### Initialize NFLDataScraper
 
-Next, import the `datetime` library, which is used to calculate the current NFL season and week.
+Next, create an instance of the `NFLDataScraper` class.
 
 ```python
-import datetime
+nfl_scraper = NFLDataScraper()
 ```
 
 ### Set Parameters
@@ -88,26 +87,9 @@ import datetime
 Set the parameters for the scraping process. This includes calculating the current NFL season and week based on the current date.
 
 ```python
-# Get the current date
-current_date = datetime.date.today()
-
-# Define the start date of an NFL season (in 2023: 07. September)
-nfl_season_start_date = datetime.date(current_date.year, 9, 7)
-
-# Calculate the current NFL season
-if current_date < nfl_season_start_date:
-    current_season = current_date.year - 1
-else:
-    current_season = current_date.year
-
-# Calculate the current NFL week (assuming a 17-week regular season)
-days_since_season_start = (current_date - nfl_season_start_date).days
-current_week = min((days_since_season_start // 7) + 1, 17)
-
-# Print the current season and week
-print("Current NFL Season:", current_season)
-print("Current NFL Week:", current_week)
+nfl_scraper.season = "2023"  # Specify the desired season
 ```
+
 ### Website Layout
 The NFL website consists of different tabs and columns. Here is the website layout and the corresponding terms used within the code:
 
@@ -125,32 +107,36 @@ Now, you can initiate the data scraping process. There are two main scenarios fo
 
 #### Get Current Season Data
 
-To retrieve statistics data for the current season, use the `get_stats` function. Specify the level ("player", "team", or both using a for loop) and the desired season.
+To retrieve statistics data for the current season, use the `get_stats` method. Specify the level ("player", "team"):
 
 ```python
-# Get stats for both player and team levels in the specified season (e.g., "1990")
+# Get stats for both player and team levels in the specified season
 for level in ["player", "team"]:
-    get_stats(level, season="1990")
+    nfl_scraper.get_stats(level)
 ```
-
 
 #### Get Historic Data
 
-To retrieve historical statistics data, create a list of years as strings, starting from 1970 up to the season just before the current season. Then, loop through the seasons and levels to retrieve data.
-
+To retrieve historical statistics data, create a list of years as strings, starting from 1970 up to the season just before the current season. Then, loop through the seasons and levels to retrieve data:
 
 ```python
 # Create a list of years as strings since 1970
-seasons = [str(year) for year in range(1970, current_season - 1)]
+seasons = [str(year) for year in range(1970, nfl_scraper.current_season - 1)]
 
 # Loop through seasons and levels to retrieve historical data
 for season in seasons:
     for level in ["player", "team"]:
-        get_stats(level, season)
+        nfl_scraper.season = season  # Set the season for scraping
+        nfl_scraper.get_stats(level)
 ```
 
 That's it! You can customize the parameters and seasons based on your specific data retrieval needs.
 
+## Functions
+
+The NFL Statistics Scraper script now utilizes the `NFLDataScraper` class to encapsulate the functions. Here's a brief overview of the class's methods:
+
+### NFLDataScraper Class
 
 ## Functions
 
@@ -196,7 +182,8 @@ The NFL Statistics Scraper script consists of several functions that serve speci
 - It combines the base directory path with the current season and week to determine the data storage directory.
 - Depending on the level ("player" or "team"), it iterates through units and categories, calling the `scrape_and_process_data` function to scrape and process data.
 
-These functions work together to scrape, process, and organize NFL statistics data for different levels (player and team) and seasons.
+These methods work together within the `NFLDataScraper` class to scrape, process, and organize NFL statistics data for different levels (player and team) and seasons.
+
 
 ## Directory Structure
 
