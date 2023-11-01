@@ -1,4 +1,4 @@
-from functions_oop import NFLDataScraper
+from functions import NFLDataScraper
 
 # Create an instance of the NFLDataScraper class
 scraper = NFLDataScraper()
