@@ -296,7 +296,7 @@ class NFLDataScraper:
         else:
             # Combine the base directory path with the current week for the current season,
             # else store data in 'reg' (regular season) directory
-            directory_path = os.path.join('data', self.season, level)
+            directory_path = os.path.join('data', str(self.season), level)
             if int(self.season) == self.current_season:
                 directory_path = os.path.join(directory_path, f'week{self.current_week}')
 
