@@ -75,7 +75,7 @@ class NFLDataScraper:
             links += [self.base_url + element.find('a')['href'] for element in a_elements]
 
         # Replace "2023" with the value of the season variable we want to scrape
-        links = [link.replace('2023', self.season) for link in links]
+        links = [link.replace('2023', str(self.season)) for link in links]
 
         return links
 
