@@ -17,21 +17,24 @@ class NFLDataScraper:
         self.current_season = None
         self.current_week = None
         self.current_date = datetime.date.today()
-        self.nfl_season_start_date = datetime.date(self.current_date.year, 9, 7)
+        self.adjusted_start_date = datetime.date(self.current_date.year - 1, 9, 7) if 1 <= self.current_date.month <= 5 else datetime.date(self.current_date.year, 9, 7)
         self.unit_links = {
             "player": {},
             "team": {}
         }
         self.season = None
+        print(f"|---| Current Date: {self.current_date}, Adjusted Start Date: {self.adjusted_start_date} |---|")
+
 
     def set_current_season_and_week(self):
-        #current_date = datetime.date.today()
-        if self.current_date < self.nfl_season_start_date:
+        if self.current_date > self.adjusted_start_date:
             self.current_season = self.current_date.year - 1
         else:
             self.current_season = self.current_date.year
-        days_since_season_start = (self.current_date - self.nfl_season_start_date).days
+        days_since_season_start = (self.current_date - self.adjusted_start_date).days
         self.current_week = min((days_since_season_start // 7) + 1, 17)
+        print(f"Current Season: {self.current_season}, Current Week: {self.current_week}")
+
 
     def get_links(self, level):
         if level == "player":
