@@ -30,9 +30,9 @@ class NFLDataScraper:
         if self.current_date > self.adjusted_start_date:
             self.current_season = self.current_date.year - 1
         else:
-            self.current_season = self.current_date.year
-        days_since_season_start = (self.current_date - self.adjusted_start_date).days
-        self.current_week = min((days_since_season_start // 7) + 1, 17)
+            self.current_season = int(self.current_date.year)
+        self.days_since_season_start = (self.current_date - self.adjusted_start_date).days
+        self.current_week = (self.days_since_season_start // 7) + 1
         print(f"Current Season: {self.current_season}, Current Week: {self.current_week}")
 
 

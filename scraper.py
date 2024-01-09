@@ -6,8 +6,8 @@ scraper = NFLDataScraper()
 # Set the season before calling get_stats
 scraper.season = 2023
 
-# Get current date and season start date
-scraper.__init__()
+# Check current season and week
+scraper.set_current_season_and_week()
 
 # Call the get_stats method with the season argument
 scraper.get_stats(level = "player")
